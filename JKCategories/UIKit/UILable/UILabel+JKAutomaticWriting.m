@@ -36,11 +36,8 @@ static char kAutomaticWritingEdgeInsetsKey;
 
 + (void)load
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        jk_AutomaticWritingSwizzleSelector([self class], @selector(textRectForBounds:limitedToNumberOfLines:), @selector(jk_automaticWritingTextRectForBounds:limitedToNumberOfLines:));
-        jk_AutomaticWritingSwizzleSelector([self class], @selector(drawTextInRect:), @selector(jk_drawAutomaticWritingTextInRect:));
-    });
+    jk_AutomaticWritingSwizzleSelector([self class], @selector(textRectForBounds:limitedToNumberOfLines:), @selector(jk_automaticWritingTextRectForBounds:limitedToNumberOfLines:));
+    jk_AutomaticWritingSwizzleSelector([self class], @selector(drawTextInRect:), @selector(jk_drawAutomaticWritingTextInRect:));
 }
 
 -(void)jk_drawAutomaticWritingTextInRect:(CGRect)rect
